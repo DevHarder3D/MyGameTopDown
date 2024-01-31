@@ -7,7 +7,10 @@ public class ControlUI : MonoBehaviour
 {
     [SerializeField] private Text txtPlayer;
     [SerializeField] private Text txtEnemy;
+    [SerializeField] private Text txtMessage;
+    private string txtNewMessage;
     [SerializeField] private EnemyDetection enemyCount;
+    [SerializeField] private OpenDoor openDoor;
     public Player player;
 
     void Start()
@@ -18,6 +21,11 @@ public class ControlUI : MonoBehaviour
     void Update()
     {
         UpdateCountEnemy();
+
+        if(enemyCount.slimes.Count <= 0)
+        {
+            OpenTheDoor();
+        }
     }
 
     public void UpdateLifePlayer(int life)
@@ -34,5 +42,12 @@ public class ControlUI : MonoBehaviour
         txtEnemy.text = enemyCount.slimes.Count.ToString();
     }
 
+    void OpenTheDoor() {
+        txtNewMessage = "Go to the next level";
+        txtMessage.text = txtNewMessage;
+        txtMessage.color = Color.green;
+
+        openDoor.OpenDoors();
+    }
     
 }
